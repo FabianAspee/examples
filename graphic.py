@@ -43,7 +43,8 @@ def create_my_plot(dataframe):
     i=1 
     for column in dataframe.columns:
         fig.add_subplot(final_row,3,i)
-        _,bins,_ = plt.hist(dataframe[column], bins=50, density=True, color='g')
+        values = dataframe[column]
+        _,bins,_ = plt.hist(values, bins=math.ceil(math.log(len(values),2)), density=True, color='g')
 
         mu, std = norm.fit(dataframe[column])   
         p = norm.pdf(bins, mu, std)
