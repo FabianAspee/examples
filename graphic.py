@@ -1,6 +1,10 @@
 import seaborn as sb
 import matplotlib.pyplot as plt 
-import numpy as np
+import numpy as np 
+import math
+import seaborn as sns 
+from scipy.stats import norm
+
 def linear_graph_unique(linear_data):
     plt.figure(figsize=(20,8))
     plt.plot(linear_data if type(linear_data) is np.ndarray else linear_data.values.reshape(-1,)) 
@@ -29,3 +33,24 @@ def plot_feature_selection(fs):
     # plot the scores
     plt.bar([i for i in range(len(fs.scores_))], fs.scores_)
     plt.show()
+
+def create_my_plot(dataframe): 
+    # create distplots 
+    row = math.floor(len(dataframe.columns)/3)
+    mod = len(dataframe.columns)%3
+    final_row = row +1 if mod>0 else row
+    fig = plt.figure(figsize=(22, 15))
+    i=1 
+    for column in dataframe.columns:
+        fig.add_subplot(final_row,3,i)
+        _,bins,_ = plt.hist(dataframe[column], bins=50, density=True, color='g')
+
+        mu, std = norm.fit(dataframe[column])   
+        p = norm.pdf(bins, mu, std)
+        i=i+1
+        plt.plot(bins, p, 'k', linewidth=2)
+        title = "Fit results: mean = %.2f,  std = %.2f, name = %s" % (mu, std, column)
+        plt.title(title)
+    
+    plt.suptitle('Data with Normal Distribution')
+  

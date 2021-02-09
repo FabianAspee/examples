@@ -24,7 +24,7 @@ result=result.astype(float)
 wind_turbine = pre.fill_NaN_values(wind_turbine.copy())
 y_train =pre.select_y(wind_turbine)
 wind_turbine = wind_turbine.drop('Rbt_avg',axis=1)  
- 
+wind_turbine.hist()
 
 #-----------------------------------FILLNaNVALUES AND SELECT TARGET----------------------------------
 
@@ -34,8 +34,7 @@ x_train = pre.standardize(x_train)
 x_test = pre.standardize(x_test)  
 #-----------------------------------SPLIT AND STANDARIZE DATA ---------------------------------------
 #-----------------------------------VIEW OUTLIER --------------------------------------------------
-
-# Fit transform verify because is not completely correctly
+ 
 model = pca(alpha=0.05, n_std=3)
 out = model.fit_transform(x_train) 
 display(out)
@@ -46,10 +45,7 @@ model.biplot3d(legend=True, SPE=True, hotellingt2=True)
 # Create only the scatter plots
 model.scatter(legend=True, SPE=True, hotellingt2=True)
 model.scatter3d(legend=True, SPE=True, hotellingt2=True)
-
-#ANOTHER WAY TO SEEN OUTLIER 
-import pca
-results = pca.spe_dmodx(np.array(wind_turbine), n_std=3, showfig=True)
+ 
 #-----------------------------------VIEW OUTLIER --------------------------------------------------
 
 
