@@ -47,10 +47,9 @@ model.biplot3d(legend=True, SPE=True, hotellingt2=True)
 model.scatter(legend=True, SPE=True, hotellingt2=True)
 model.scatter3d(legend=True, SPE=True, hotellingt2=True)
 
-#ANOTHER WAY TO SEEN OUTLIER
+#ANOTHER WAY TO SEEN OUTLIER 
 import pca
-outliers_hot = pca.hotellingsT2(out['PC'].values, alpha=0.05)
-outliers_spe = pca.spe_dmodx(out['PC'].values, n_std=2) 
+results = pca.spe_dmodx(np.array(wind_turbine), n_std=3, showfig=True)
 #-----------------------------------VIEW OUTLIER --------------------------------------------------
 
 
