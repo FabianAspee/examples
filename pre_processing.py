@@ -27,10 +27,10 @@ def extract_value_avg(dataset):
     return dataset
 
 def split_dataset(x,y):
-    train_test_split(x,y, test_size=0.2) #split data in train and test
+    return train_test_split(x,y, test_size=0.2) #split data in train and test
 
 def lasso_model(x,y):
-    SelectKBest(chi2, k=2).fit_transform(x, y)#only positive values
+    return SelectKBest(chi2, k=2).fit_transform(x, y)#only positive values
 
 def variance_three_shold(X):
     sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
@@ -46,14 +46,14 @@ def select_y(wind_turbine):
 
 def select_best_f_regression(x_train,y_train,k,x_test):    
     fs = SelectKBest(score_func=f_regression, k=k)
-    fs.fit(x_train, y_train.values.reshape(-1,))
+    fs.fit(x_train, y_train)
     X_train_fs = fs.transform(x_train)
     X_test_fs = fs.transform(x_test)
     return X_train_fs, X_test_fs, fs
 
 def select_best_mutual_f_regression(x_train,y_train,k,x_test):    
     fs = SelectKBest(score_func=mutual_info_regression, k=k)
-    fs.fit(x_train, y_train.values.reshape(-1,))
+    fs.fit(x_train, y_train)
     X_train_fs = fs.transform(x_train)
     X_test_fs = fs.transform(x_test)
     return X_train_fs, X_test_fs, fs

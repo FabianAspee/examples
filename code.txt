@@ -1,0 +1,5 @@
+model = pca(alpha=0.05, n_std=3,n_components=0.95)
+out = model.fit_transform(x_train[:,0:3])  
+# Create only the scatter plots
+model.biplot(legend=True, SPE=True, hotellingt2=True) 
+model.biplot3d(legend=True, SPE=True, hotellingt2=True)  

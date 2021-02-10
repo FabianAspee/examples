@@ -44,7 +44,7 @@ def create_my_plot(dataframe):
     for column in dataframe.columns:
         fig.add_subplot(final_row,3,i)
         values = dataframe[column]
-        _,bins,_ = plt.hist(values, bins=math.ceil(math.log(len(values),2)), density=True, color='g')
+        _,bins,_ = plt.hist(values, bins=math.ceil(math.log(len(values),2)), density=True, color='g')#use of sturge's formula log2N+1
 
         mu, std = norm.fit(dataframe[column])   
         p = norm.pdf(bins, mu, std)
@@ -54,4 +54,27 @@ def create_my_plot(dataframe):
         plt.title(title)
     
     plt.suptitle('Data with Normal Distribution')
+
+def create_my_plot_numpy(numpy_array): 
+    # create distplots 
+    _,columns =numpy_array.shape 
+    row = math.floor(columns/3)
+    mod = columns%3
+    final_row = row +1 if mod>0 else row
+    fig = plt.figure(figsize=(22, 15))
+    i=1 
+    for column in range(columns):
+        fig.add_subplot(final_row,3,i)
+        values = numpy_array[:,column]
+        _,bins,_ = plt.hist(values, bins=math.ceil(math.log(len(values),2)), density=True, color='g')#use of sturge's formula log2N+1
+
+        mu, std = norm.fit(numpy_array[:,column])   
+        p = norm.pdf(bins, mu, std)
+        i=i+1
+        plt.plot(bins, p, 'k', linewidth=2)
+        title = "Fit results: mean = %.2f,  std = %.2f, name = %s" % (mu, std, column)
+        plt.title(title)
+    
+    plt.suptitle('Data with Normal Distribution')
+
   
