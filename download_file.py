@@ -22,7 +22,7 @@ def download_file():
 
 def download_file_csv(name_file,url,separator,columns):  
     r = requests.get(f'{url}/{name_file}', stream=True)
-    with open(name_file, 'wb') as fd:
+    with open(f'data2017_2020\\{name_file}', 'wb') as fd:
         for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)  
     return read_csv(name_file,separator,columns)
