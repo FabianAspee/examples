@@ -28,6 +28,9 @@ def extract_value_avg(dataset):
 
 def split_dataset(x,y):
     return train_test_split(x,y, test_size=0.2) #split data in train and test
+    
+def split_dataset(x):
+    return train_test_split(x, test_size=0.2,shuffle=False) #split data in train and test
 
 def lasso_model(x,y):
     return SelectKBest(chi2, k=2).fit_transform(x, y)#only positive values
